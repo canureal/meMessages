@@ -8,6 +8,12 @@ services:
       - scylla-data:/var/lib/scylla
     networks:
       - meMessages-net
+    healthcheck:
+      test: ["CMD-SHELL", "cqlsh -e 'describe cluster' || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
 
   meMessages:
     image:  ghcr.io/canureal/memessages:main
@@ -18,7 +24,8 @@ services:
       - CQL_HOSTS=${CQL_HOSTS}
       - CQL_KEYSPACE=${CQL_KEYSPACE}
     depends_on:
-      - scylla
+      scylla:
+        condition: service_healthy
     networks:
       - meMessages-net
 

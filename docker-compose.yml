@@ -3,14 +3,14 @@ services:
     image: scylladb/scylla
     container_name: meMessageScylla
     restart: unless-stopped
-    command: --smp 1 --memory 750 --overprovisioned
+    command: --smp 1 --memory 750M --overprovisioned 1
     volumes:
       - scylla-data:/var/lib/scylla
     networks:
       - meMessages-net
 
   meMessages:
-    image:  ghcr.io/canureal/memessages:latest
+    image:  ghcr.io/canureal/memessages:main
     restart: unless-stopped
     ports:
       - "4444:4444"

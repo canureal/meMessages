@@ -17,8 +17,8 @@ func EnsureKeyspace(hosts string, keyspaces string) {
 	defer session.Close()
 
 	err = session.Query(`
-	CREATE KEYSPACE IF NOT EXISTS ` + keyspaces + ` WITH REPLICATION = {'class': 'NetworkTopologyStrategy', 'replication_factor':  1}` 
-	).Exec()
+		CREATE KEYSPACE IF NOT EXISTS ` + keyspaces + ` WITH REPLICATION = {'class': 'NetworkTopologyStrategy', 'replication_factor':  1} 
+	`).Exec()
 	if err != nil {
 		log.Fatal(err)
 	}

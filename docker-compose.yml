@@ -10,7 +10,7 @@ services:
       - meMessages-net
 
   meMessages:
-    image: # we'll see on ghcr.io
+    image:  ghcr.io/canureal/memessages:latest
     restart: unless-stopped
     ports:
       - "4444:4444"

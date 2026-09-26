@@ -15,7 +15,6 @@ func Connect(hosts string, keyspaces string) *gocql.Session {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer session.Close()
 
 	log.Printf("Connected to scylla")
 	return session

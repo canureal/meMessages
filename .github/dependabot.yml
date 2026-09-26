@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/src"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "golang.org/x/net"
+        versions: ["0.19.0"]

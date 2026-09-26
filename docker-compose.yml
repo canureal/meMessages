@@ -1,0 +1,30 @@
+services:
+  scylla:
+    image: scylladb/scylla
+    container_name: meMessageScylla
+    restart: unless-stopped
+    command: --smp 1 --memory 750 --overprovisioned
+    volumes:
+      - scylla-data:/var/lib/scylla
+    networks:
+      - meMessages-net
+
+  meMessages:
+    image: # we'll see on ghcr.io
+    restart: unless-stopped
+    ports:
+      - "4444:4444"
+    environment:
+      - CQL_HOSTS=${CQL_HOSTS}
+      - CQL_KEYSPACE=${CQL_KEYSPACE}
+    depends_on:
+      - scylla
+    networks:
+      - meMessages-net
+
+volumes:
+  scylla-data:
+
+networks:
+  meMessages-net:
+    driver: bridge
